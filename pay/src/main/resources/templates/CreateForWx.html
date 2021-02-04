@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.min.js"></script>
+</head>
+<body>:
+    <div id="myQrcode"></div>
+</body>
+</html>
+
+<script th:inline="javascript">
+    const myQrcode = document.getElementById("myQrcode");
+    new QRCode(myQrcode, [[${codeUrl}]])
+
+    const query = () => {
+        setInterval(async () => {
+            console.log("开始查询支付状态")
+            const { data } = await axios.get("/pay/queryByOrderId?orderId=" + [[${orderId}]])
+            const platformStatus = data[0].platformStatus
+            if (platformStatus === "SUCCESS") {
+                location.href = [[${returnUrl}]]
+            }
+        }, 2000)
+    }
+    query()
+</script>

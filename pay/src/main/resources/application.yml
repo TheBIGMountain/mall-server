@@ -1,0 +1,18 @@
+server:
+  port: 8081
+
+wx:
+  app-id:
+  mch-id:
+  mch-key:
+  return-url:
+  notify-url:
+
+alipay:
+  app-id:
+  private-key:
+  ali-pay-public-key:
+  return-url:
+  notify-url:
+
+
